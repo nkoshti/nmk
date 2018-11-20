@@ -1,0 +1,133 @@
+
+*  Bean Scope:
+
+  a. singleton: It is only one object can be created.By defalut bean scope is singleton. for Example if you are created two object A and B and use to singelton bean then only one oject created.
+
+   public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+      HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
+
+      objA.setMessage("I'm object A");
+      objA.getMessage();
+
+      HelloWorld objB = (HelloWorld) context.getBean("helloWorld");
+      objB.getMessage();
+   }
+}
+
+
+output: 
+
+Your Message : I'm object A
+Your Message : I'm object A
+
+
+
+  b. prototype: 
+           
+   public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+      HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
+
+      objA.setMessage("I'm object A");
+      objA.getMessage();
+
+      HelloWorld objB = (HelloWorld) context.getBean("helloWorld");   // if you writing objB.setMessage("I'm object B");  then call the object B.
+      objB.getMessage();
+   }
+}
+
+output:
+
+Your Message : I'm object A
+Your Message : null
+
+
+  c. session
+  d. request
+  e. global-session
+
+* DEPENDANCY INJECTION: There are two types of Dependancy Injection
+    
+     1. Constructor based Dependancy Injection
+     2. Setter based Dependancy Injection(using setter Method)
+  
+
+
+
+
+
+Annotations:
+
+1.@SpringBootApplication: it is used to all configuration.If you are writing the this annotation then not requried to @EnableAutoConfiguration, @ComponentScan and @SpringBootConfiguration annotation. The @SpringBootApplication annotation includes all other annotations.
+
+2.@Componenetscan: Spring Boot application scans all the beans and package declarations when the application initializes. 
+
+3.ServletIntitlizer: @SpringBootApplication class extend the SpringBootServletInitializer class. Spring Boot Servlet Initializer class file allows you to configure the application when it is launched by using Servlet Container.
+
+4.@RestController:  @RestController annotation is used to define the RESTful web services. It serves JSON, XML and custom response. 
+
+5.@RequestMapping: @RequestMapping annotation is used to define the Request URI to access the REST Endpoints. We can define Request method to consume and produce object.
+
+6.@RequestBody: @RequestBody annotation is used to define the request body content type.
+
+7.@PathVariable: @PathVariable annotation is used to define the custom or dynamic request URI. The Path variable in request URI is defined as curly braces {} as shown below -
+
+                            public ResponseEntity<Object> updateProduct(@PathVariable("id") String id) {
+                            }
+
+8.@RequestParam: @RequestParam annotation is used to read the request parameters from the Request URL.
+
+9.RESTAPI:
+     
+    a. GET API: To create a database
+    b. POST API: Insert Data into databse
+    c. PUT API: To update Data into database
+    d. DELETE API: TO delete data into databse
+
+10.@ControllerAdvice: The @ControllerAdvice is an annotation, to handle the exceptions globally.
+
+11.@ExceptionHandler: The @ExceptionHandler is an annotation used to handle the specific exceptions and sending the custom responses to the client.
+
+12.@Requried: @Required annotation applies to bean property setter methods.
+
+13.@Autowired: @Autowired annotation can apply to bean property setter methods, non-setter methods, constructor and properties.
+
+14.@Qualifier: @Qualifier annotation along with @Autowired can be used to remove the confusion by specifiying which exact bean will be wired.
+
+15.@PostConstruct(Init) & @PreDestroy(Destroy): @PostConstruct annotation as an alternate of initialization callback and @PreDestroy annotation as an alternate of destruction callback 
+
+
+
+--------------------------------------------------------------Spring MVC--------------------------------------------------------------------------------------
+
+1. DispatcherServlet: It handles all the HTTP requests and responses.
+
+
+
+
+--------------------------------------------------------------Spring Boot--------------------------------------------------------------------------------------
+
+1.Starter: Starters are a set of convenient dependency descriptors which we can include in our application.
+
+Spring Boot provides built-in starters which makes development easier and rapid. For example, if we want to get started using Spring and JPA for database access, just include the spring-boot-starter-data-jpa dependency in your project.
+
+2.Spring-Boot-Starter-Actuator: It is used for Spring Boots Actuator which provides production ready features to help you monitor and manage your application.Spring Boot provides actuator to monitor and manage our application. Actuator is a tool which has HTTP endpoints. when application is pushed to production, you can choose to manage and monitor your application using HTTP endpoints.
+
+3.Interceptor: Interceptor in Spring Boot to perform operations under the following situations -
+
+       Before sending the request to the controller
+
+       Before sending the response to the client
+
+For example, you can use an interceptor to add the request header before sending the request to the controller and add the response header before sending the response to the client.
+
+To work with interceptor, you need to create @Component class that supports it and it should implement the HandlerInterceptor interface.
+
+
+
+
+
+
